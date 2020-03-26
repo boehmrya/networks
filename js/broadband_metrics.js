@@ -1716,9 +1716,6 @@ jQuery(function($){
     mapSize = 800;
   }
 
-  // dictionary to hold geoid and associated property data
-  var geoDict = {};
-
   // D3 Projection
   var projection = d3.geo.albersUsa()
   				   .translate([width/2, height/2.2])    // translate to center of screen
@@ -1766,44 +1763,94 @@ jQuery(function($){
         d3.selectAll('path').style({ 'fill': 'rgb(52, 63, 73)' }); // clear all colors
         d3.select(this).attr('class', 'active'); // add active class to current element
         d3.select(this).style('fill', 'rgb(90, 201, 231)'); // fill current clicked state with blue
+
+        // run update data function
+        updateData(state_id[d.id]);
       });
-
-
-
-      // update information in sidebar card
-      // runs when dot is clicked or option in dropdown is selected
-      function updateCard(state_id) {
-        // get location from dict
-        var location = data_states[state_id];
-
-        // parse name of metro area to add space around hyphens
-        var name = location.NAME;
-        if (name.indexOf("-") >= 0) {
-          nameParts = name.split("-");
-          name = nameParts.join(" - ");
-        }
-
-        // change dot class and color in card
-        $("#metro-area .name").html(name);
-
-        // change stats in card
-        $("#access-rate").html((location.access_rate*100).toFixed(1) + '%');
-        $("#subscription-rate").html((location.subscription_rate*100).toFixed(1) + '%');
-        $("#population").html(Math.floor(location.population).toLocaleString());
-        $("#with-subscription").html(Math.floor(location.with_subscription).toLocaleString());
-        $("#without-subscription").html(Math.floor(location.without_subscription).toLocaleString());
-      }
-
-
 
     });
 
 
     // populate the state dropdown
     $.each(data_states, function(i, v){
-      console.log(v);
       $("#filterFormStateSelect").append("<option value=\""+ i +"\">" + this.name + "</option>");
     });
+
+    // trigger map click events on select list change events
+    $("#filterFormStateSelect").change(function() {
+      $("#filterFormStateSelect option:selected").each(function(){
+        var selected = $(this).val();
+        var selected_elem = '#broadband-metrics-map svg #' + selected;
+        console.log(selected_elem);
+
+        // update the map
+        d3.selectAll('path').classed('active', false); // remove active classes
+        d3.selectAll('path').style({ 'fill': 'rgb(52, 63, 73)' }); // clear all colors
+        d3.select(selected_elem).attr('class', 'active'); // add active class to current element
+        d3.select(selected_elem).style('fill', 'rgb(90, 201, 231)'); // fill current clicked state with blue
+
+        // update data in sidebar
+        updateData(selected);
+      });
+    });
+
+    // update information in sidebar card
+    // runs when dot is clicked or option in dropdown is selected
+    function updateData(state_id) {
+      // get location from dict
+      var state = data_states[state_id];
+
+      // upstream and downstream growth variables
+      var downstream_growth_overall = state.downstream_growth.overall;
+      var downstream_growth_past_week = state.downstream_growth.past_week;
+      var upstream_growth_overall = state.upstream_growth.overall;
+      var upstream_growth_past_week = state.upstream_growth.past_week;
+
+      // network performance variables
+      var performance_normal = state.network_performance.normal;
+      var performance_elevated = state.network_performance.elevated;
+      var performance_substantially_elevated = state.network_performance.substantially_elevated;
+      var performance_severely_elevated = state.network_performance.severely_elevated;
+
+      // update upstream and downstream data points
+      $("#downstream-growth-overall").text(downstream_growth_overall);
+      $("#downstream-growth-past-week").text(downstream_growth_past_week);
+      $("#upstream-growth-overall").text(upstream_growth_overall);
+      $("#upstream-growth-past-week").text(upstream_growth_past_week);
+
+      // update performance data points
+      $("#performance-normal").text(performance_normal);
+      $("#performance-elevated").text(performance_elevated);
+      $("#performance-substantially-elevated").text(performance_substantially_elevated);
+      $("#performance-severely-elevated").text(performance_severely_elevated);
+
+      // add style percentage widths to performance bar
+
+
+
+      // fill in cale isps with name and link
+      // first, empty out the block
+      jQuery("#isp-operator-names").empty();
+
+      // Loading provider names into array to allow alpha sorting of provider images (quickfix - this module is not tied to its own Drupal admin sort preference...)
+      var providerNames = [];
+      jQuery.each(data_states[state_id].providers, function(i,v) {
+           providerNames.push(this.name);
+      });
+
+      providerNames.sort();
+
+      for(var q=0; q < providerNames.length; q++) {
+          jQuery.each(data_states[state_id].providers, function(i,v) {
+              if(this.name == providerNames[q])
+                jQuery("#isp-operator-names").append("<div class=\"provider\"><a href=\"" + this.link + "\" target=\"_blank\">" + this.name + "</a></div>");
+          });
+      }
+
+      // update the select list to the chosen state
+      $("#filterFormStateSelect").val(state_id);
+    }
+    // end updateData function
 
 
   });

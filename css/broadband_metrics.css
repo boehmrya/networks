@@ -1,10 +1,39 @@
 
 
 .metrics-wrap {
-  max-width: 1170px;
+  max-width: 1140px;
   margin: 40px auto;
 }
 
 path.state {
   cursor: pointer;
+}
+
+h2.metrics-section-title {
+  font-size: 2.5rem;
+  letter-spacing: -.2px;
+  line-height: 2.875rem;
+  margin-bottom: 20px;
+}
+
+.metrics-filter-instructions {
+  font-size: 1.25rem;
+  margin-bottom: 20px;
+}
+
+.metrics-content-wrap::after {
+  content: "";
+  clear: both;
+  display: table;
+}
+
+.metrics-content-wrap .data-col {
+  width: 360px;
+  margin-right: 40px;
+  float: left;
+}
+
+.metrics-content-wrap #broadband-metrics-map {
+  width: 740px;
+  float: left;
 }

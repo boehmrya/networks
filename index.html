@@ -36,7 +36,7 @@
           <div class="downstream-growth-title">Downstream Growth (% of usage)</div>
           <div class="overall">
             <div class="figure">
-              <span class="num">15</span>
+              <span id="downstream-growth-overall" class="num">15</span>
               <span class="percent">%</span>
             </div>
             <div class="label">
@@ -46,7 +46,7 @@
           </div>
           <div class="past-week">
             <div class="figure">
-              <span class="num">20</span>
+              <span id="downstream-growth-past-week" class="num">20</span>
               <span class="percent">%</span>
             </div>
             <div class="label">
@@ -60,14 +60,14 @@
           <div class="downstream-growth-title">Upstream Growth (% of usage)</div>
           <div class="overall">
             <div class="figure">
-              <span class="num">23</span>
+              <span id="upstream-growth-overall" class="num">23</span>
               <span class="percent">%</span>
             </div>
             <div class="label">Overall <br>Since 3/1</div>
           </div>
           <div class="past-week">
             <div class="figure">
-              <span class="num">30</span>
+              <span id="upstream-growth-past-week" class="num">30</span>
               <span class="percent">%</span>
             </div>
             <div class="label">Over <br>Past Week</div>
@@ -76,16 +76,16 @@
 
         <div class="performance">
           <div class="performance-title">Network Performance</div>
-          <div class="bar">
-            <div class="bar-normal"></div>
-            <div class="bar-elevated-peak"></div>
-            <div class="bar-substantially-elevated-peak"></div>
-            <div class="bar-severely-elevated-peak"></div>
+          <div class="bars">
+            <div id="bar-normal" class="bar"></div>
+            <div id="bar-elevated-peak" class="bar"></div>
+            <div id="bar-substantially-elevated-peak" class="bar"></div>
+            <div id="bar-severely-elevated-peak" class="bar"></div>
           </div>
           <div class="figures-legend">
             <div class="legend-row one">
               <div class="figure">
-                <span class="num">88</span>
+                <span id="performance-normal" class="num">88</span>
                 <span class="percent">%</span>
               </div>
               <div class="key green"></div>
@@ -94,7 +94,7 @@
 
             <div class="legend-row two">
               <div class="figure">
-                <span class="num">20</span>
+                <span id="performance-elevated" class="num">20</span>
                 <span class="percent">%</span>
               </div>
               <div class="key yellow"></div>
@@ -103,7 +103,7 @@
 
             <div class="legend-row three">
               <div class="figure">
-                <span class="num">10</span>
+                <span id="performance-substantially-elevated" class="num">10</span>
                 <span class="percent">%</span>
               </div>
               <div class="key orange"></div>
@@ -112,7 +112,7 @@
 
             <div class="legend-row four">
               <div class="figure">
-                <span class="num">0</span>
+                <span id="performance-severely-elevated" class="num">0</span>
                 <span class="percent">%</span>
               </div>
               <div class="key red"></div>
@@ -122,8 +122,8 @@
         </div>
 
         <div class="isp-operators">
-          <div class="operators-title">ISP Operators</div>
-          <div class="operator-names"></div>
+          <div class="isp-title">ISP Operators</div>
+          <div id="isp-operator-names"></div>
         </div>
 
 
