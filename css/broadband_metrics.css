@@ -1,0 +1,10 @@
+
+
+.metrics-wrap {
+  max-width: 1170px;
+  margin: 40px auto;
+}
+
+path.state {
+  cursor: pointer;
+}

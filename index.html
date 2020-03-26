@@ -1,0 +1,1784 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <meta charset="utf-8">
+  <title></title>
+  <meta name="author" content="">
+  <meta name="description" content="">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  <link href="css/normalize.css" rel="stylesheet">
+  <link href="css/broadband_metrics.css" rel="stylesheet">
+
+  <script src="https://use.typekit.net/mhj7sfh.js"></script>
+  <script>try{Typekit.load({ async: true });}catch(e){}</script>
+</head>
+
+<body>
+
+  <div class="metrics-wrap">
+    <div class="metrics-header">
+      <h2 class="metrics-section-title">Covid-19: How Cable's Internet Networks Are Performing</h2>
+      <div class="metrics-filter-instructions">Select your state to display network information.</div>
+    </div>
+    <div class="metrics-content-wrap">
+      <div class="data-col">
+        <div class="state-filter">
+          <form action="/" id="stateFilterForm" method="get">
+            <select id="filterFormStateSelect">
+              <option selected="selected" value="00">Select Your State</option>
+            </select>
+          </form>
+        </div>
+
+        <div class="downstream-growth">
+          <div class="downstream-growth-title">Downstream Growth (% of usage)</div>
+          <div class="overall">
+            <div class="figure">
+              <span class="num">15</span>
+              <span class="percent">%</span>
+            </div>
+            <div class="label">
+              Overall<br>
+              Since 3/1
+            </div>
+          </div>
+          <div class="past-week">
+            <div class="figure">
+              <span class="num">20</span>
+              <span class="percent">%</span>
+            </div>
+            <div class="label">
+              Over<br>
+              Past Week
+            </div>
+          </div>
+        </div>
+
+        <div class="upstream-growth">
+          <div class="downstream-growth-title">Upstream Growth (% of usage)</div>
+          <div class="overall">
+            <div class="figure">
+              <span class="num">23</span>
+              <span class="percent">%</span>
+            </div>
+            <div class="label">Overall <br>Since 3/1</div>
+          </div>
+          <div class="past-week">
+            <div class="figure">
+              <span class="num">30</span>
+              <span class="percent">%</span>
+            </div>
+            <div class="label">Over <br>Past Week</div>
+          </div>
+        </div>
+
+        <div class="performance">
+          <div class="performance-title">Network Performance</div>
+          <div class="bar">
+            <div class="bar-normal"></div>
+            <div class="bar-elevated-peak"></div>
+            <div class="bar-substantially-elevated-peak"></div>
+            <div class="bar-severely-elevated-peak"></div>
+          </div>
+          <div class="figures-legend">
+            <div class="legend-row one">
+              <div class="figure">
+                <span class="num">88</span>
+                <span class="percent">%</span>
+              </div>
+              <div class="key green"></div>
+              <div class="label">Normal Peak Usage</div>
+            </div>
+
+            <div class="legend-row two">
+              <div class="figure">
+                <span class="num">20</span>
+                <span class="percent">%</span>
+              </div>
+              <div class="key yellow"></div>
+              <div class="label">Elevated Peak Usage</div>
+            </div>
+
+            <div class="legend-row three">
+              <div class="figure">
+                <span class="num">10</span>
+                <span class="percent">%</span>
+              </div>
+              <div class="key orange"></div>
+              <div class="label">Substantially Elevated Peak Usage</div>
+            </div>
+
+            <div class="legend-row four">
+              <div class="figure">
+                <span class="num">0</span>
+                <span class="percent">%</span>
+              </div>
+              <div class="key red"></div>
+              <div class="label">Severely Elevated Peak Usage</div>
+            </div>
+          </div>
+        </div>
+
+        <div class="isp-operators">
+          <div class="operators-title">ISP Operators</div>
+          <div class="operator-names"></div>
+        </div>
+
+
+      </div>
+      <div id="broadband-metrics-map" class="map">&nbsp;</div>
+    </div>
+  </div>
+
+  <script>
+  var data_states = {
+    US: {
+      id: 'US',
+      name: 'National',
+      downstream_growth: {
+        overall: 15,
+        past_week: 20
+      },
+      upstream_growth: {
+        overall: 23,
+        past_week: 30
+      },
+      network_performance: {
+        normal: 88,
+        elevated: 7,
+        substantially_elevated: 3,
+        severely_elevated: 2
+      },
+      providers: {
+        2540: {
+         name: 'Altice',
+         link: 'https://www.alticeusa.com/'
+       },
+        2560: {
+          name: 'Charter',
+          link: 'http://www.charter.net/'
+        },
+        2558: {
+          name: 'Comcast',
+          link: 'http://www.comcast.com/'
+        },
+        2559: {
+          name: 'Cox',
+          link: 'http://www.cox.com/'
+        },
+        2567: {
+          name: 'Mediacom',
+          link: 'http://www.mediacomcable.com'
+        },
+        2568: {
+          name: 'Midco',
+          link: 'http://www.midco.com/'
+        },
+        2619: {
+         name: 'GCI',
+         link: 'http://www.gci.com'
+       },
+        3604: {
+          name: 'Vyve',
+          link: 'http://www.vyvebroadband.com/'
+        }
+      }
+    },
+    AL: {
+      id: 'AL',
+      name: 'Alabama',
+      downstream_growth: {
+        overall: 13,
+        past_week: 18
+      },
+      upstream_growth: {
+        overall: 21,
+        past_week: 28
+      },
+      network_performance: {
+        normal: 86,
+        elevated: 9,
+        substantially_elevated: 2,
+        severely_elevated: 3
+      },
+      providers: {
+         2560: {
+          name: 'Charter',
+          link: 'http://www.charter.net/'
+        },
+        2558: {
+          name: 'Comcast',
+          link: 'http://www.comcast.com/'
+        },
+        2567: {
+          name: 'Mediacom',
+          link: 'http://www.mediacomcable.com'
+        }
+      }
+    },
+    AK: {
+      id: 'AK',
+      name: 'Alaska',
+      downstream_growth: {
+        overall: 12,
+        past_week: 19
+      },
+      upstream_growth: {
+        overall: 22,
+        past_week: 27
+      },
+      network_performance: {
+        normal: 85,
+        elevated: 10,
+        substantially_elevated: 4,
+        severely_elevated: 1
+      },
+      providers: {
+         2619: {
+          name: 'GCI',
+          link: 'http://www.gci.com'
+        }
+      }
+    },
+    AZ: {
+      id: 'AZ',
+      name: 'Arizona',
+      downstream_growth: {
+        overall: 17,
+        past_week: 24
+      },
+      upstream_growth: {
+        overall: 29,
+        past_week: 36
+      },
+      network_performance: {
+        normal: 90,
+        elevated: 7,
+        substantially_elevated: 2,
+        severely_elevated: 1
+      },
+      providers: {
+        2560: {
+          name: 'Charter',
+          link: 'http://www.charter.net/'
+        },
+        2558: {
+          name: 'Comcast',
+          link: 'http://www.comcast.com/'
+        },
+        2559: {
+          name: 'Cox',
+          link: 'http://www.cox.com/'
+        },
+        2567: {
+          name: 'Mediacom',
+          link: 'http://www.mediacomcable.com'
+        }
+      }
+    },
+    AR: {
+      id: 'AR',
+      name: 'Arkansas',
+      downstream_growth: {
+        overall: 16,
+        past_week: 23
+      },
+      upstream_growth: {
+        overall: 27,
+        past_week: 33
+      },
+      network_performance: {
+        normal: 91,
+        elevated: 6,
+        substantially_elevated: 2,
+        severely_elevated: 1
+      },
+      providers: {
+        2558: {
+          name: 'Comcast',
+          link: 'http://www.comcast.com/'
+        },
+        2559: {
+          name: 'Cox',
+          link: 'http://www.cox.com/'
+        },
+        3604: {
+          name: 'Vyve',
+          link: 'http://www.vyvebroadband.com/'
+        }
+      }
+    },
+    CA: {
+      id: 'CA',
+      name: 'California',
+      downstream_growth: {
+        overall: 15,
+        past_week: 22
+      },
+      upstream_growth: {
+        overall: 29,
+        past_week: 39
+      },
+      network_performance: {
+        normal: 94,
+        elevated: 4,
+        substantially_elevated: 2,
+        severely_elevated: 0
+      },
+      providers: {
+        2560: {
+          name: 'Charter',
+          link: 'http://www.charter.net/'
+        },
+        2558: {
+          name: 'Comcast',
+          link: 'http://www.comcast.com/'
+        },
+        2559: {
+          name: 'Cox',
+          link: 'http://www.cox.com/'
+        },
+        2567: {
+          name: 'Mediacom',
+          link: 'http://www.mediacomcable.com/'
+        }
+      }
+    },
+    CO: {
+      id: 'CO',
+      name: 'Colorado',
+      downstream_growth: {
+        overall: 24,
+        past_week: 29
+      },
+      upstream_growth: {
+        overall: 33,
+        past_week: 37
+      },
+      network_performance: {
+        normal: 95,
+        elevated: 2,
+        substantially_elevated: 2,
+        severely_elevated: 1
+      },
+      providers: {
+         2560: {
+          name: 'Charter',
+          link: 'http://www.charter.net/'
+        },
+        2558: {
+          name: 'Comcast',
+          link: 'http://www.comcast.com/'
+        },
+        2566: {
+          name: 'Eagle Communications',
+          link: 'http://www.eaglecom.net/'
+        },
+        3604: {
+          name: 'Vyve',
+          link: 'http://www.vyvebroadband.com/'
+        }
+      }
+    },
+    CT: {
+      id: 'CT',
+      name: 'Connecticut',
+      downstream_growth: {
+        overall: 23,
+        past_week: 28
+      },
+      upstream_growth: {
+        overall: 32,
+        past_week: 36
+      },
+      network_performance: {
+        normal: 94,
+        elevated: 4,
+        substantially_elevated: 1,
+        severely_elevated: 1
+      },
+      providers: {
+        2560: {
+          name: 'Charter',
+          link: 'http://www.charter.net/'
+        },
+        2558: {
+          name: 'Comcast',
+          link: 'http://www.comcast.com/'
+        },
+        2559: {
+          name: 'Cox',
+          link: 'http://www.cox.com/'
+        }
+      }
+    },
+    DE: {
+      id: 'DE',
+      name: 'Delaware',
+      downstream_growth: {
+        overall: 20,
+        past_week: 26
+      },
+      upstream_growth: {
+        overall: 35,
+        past_week: 38
+      },
+      network_performance: {
+        normal: 87,
+        elevated: 8,
+        substantially_elevated: 3,
+        severely_elevated: 2
+      },
+      providers: {
+         2558: {
+          name: 'Comcast',
+          link: 'http://www.comcast.com/'
+        },
+        2567: {
+          name: 'Mediacom',
+          link: 'http://www.mediacomcable.com/'
+        }
+      }
+    },
+    DC: {
+      id: 'DC',
+      name: 'District Of Columbia',
+      downstream_growth: {
+        overall: 18,
+        past_week: 22
+      },
+      upstream_growth: {
+        overall: 27,
+        past_week: 33
+      },
+      network_performance: {
+        normal: 86,
+        elevated: 9,
+        substantially_elevated: 3,
+        severely_elevated: 2
+      },
+      providers: {
+         2558: {
+          name: 'Comcast',
+          link: 'http://www.comcast.com/'
+        }
+      }
+    },
+    FL: {
+      id: 'FL',
+      name: 'Florida',
+      downstream_growth: {
+        overall: 19,
+        past_week: 24
+      },
+      upstream_growth: {
+        overall: 26,
+        past_week: 31
+      },
+      network_performance: {
+        normal: 89,
+        elevated: 9,
+        substantially_elevated: 1,
+        severely_elevated: 1
+      },
+      providers: {
+         2560: {
+          name: 'Charter',
+          link: 'http://www.charter.net/'
+        },  2558: {
+          name: 'Comcast',
+          link: 'http://www.comcast.com/'
+        },  2559: {
+          name: 'Cox',
+          link: 'http://www.cox.com/'
+        },  2567: {
+          name: 'Mediacom',
+          link: 'http://www.mediacomcable.com/'
+        }
+      }
+    },
+    GA: {
+      id: 'GA',
+      name: 'Georgia',
+      downstream_growth: {
+        overall: 21,
+        past_week: 25
+      },
+      upstream_growth: {
+        overall: 24,
+        past_week: 33
+      },
+      network_performance: {
+        normal: 92,
+        elevated: 4,
+        substantially_elevated: 2,
+        severely_elevated: 2
+      },
+      providers: {
+         2560: {
+          name: 'Charter',
+          link: 'http://www.charter.net/'
+        },  2558: {
+          name: 'Comcast',
+          link: 'http://www.comcast.com/'
+        },  2559: {
+          name: 'Cox',
+          link: 'http://www.cox.com/'
+        },  2567: {
+          name: 'Mediacom',
+          link: 'http://www.mediacomcable.com/'
+        },  3604: {
+          name: 'Vyve',
+          link: 'http://www.vyvebroadband.com/'
+        }
+      }
+    },
+    HI: {
+      id: 'HI',
+      name: 'Hawaii',
+      downstream_growth: {
+        overall: 22,
+        past_week: 24
+      },
+      upstream_growth: {
+        overall: 25,
+        past_week: 32
+      },
+      network_performance: {
+        normal: 91,
+        elevated: 5,
+        substantially_elevated: 2,
+        severely_elevated: 2
+      },
+      providers: {
+         2560: {
+          name: 'Charter',
+          link: 'http://www.charter.net/'
+        }
+      }
+    },
+    ID: {
+      id: 'ID',
+      name: 'Idaho',
+      downstream_growth: {
+        overall: 26,
+        past_week: 29
+      },
+      upstream_growth: {
+        overall: 28,
+        past_week: 38
+      },
+      network_performance: {
+        normal: 94,
+        elevated: 3,
+        substantially_elevated: 2,
+        severely_elevated: 1
+      },
+      providers: {
+        2558: {
+          name: 'Comcast',
+          link: 'http://www.comcast.com/'
+        },
+        2559: {
+          name: 'Cox',
+          link: 'http://www.cox.com/'
+        },
+        2560: {
+          name: 'Charter',
+          link: 'http://www.charter.net/'
+        }
+      }
+    },
+    IL: {
+      id: 'IL',
+      name: 'Illinois',
+      downstream_growth: {
+        overall: 28,
+        past_week: 32
+      },
+      upstream_growth: {
+        overall: 32,
+        past_week: 37
+      },
+      network_performance: {
+        normal: 95,
+        elevated: 3,
+        substantially_elevated: 1,
+        severely_elevated: 1
+      },
+      providers: {
+        2560: {
+          name: 'Charter',
+          link: 'http://www.charter.net/'
+        },
+        2558: {
+          name: 'Comcast',
+          link: 'http://www.comcast.com/'
+        },
+        2567: {
+          name: 'Mediacom',
+          link: 'http://www.mediacomcable.com/'
+        }
+      }
+    },
+    IN: {
+      id: 'IN',
+      name: 'Indiana',
+      downstream_growth: {
+        overall: 23,
+        past_week: 30
+      },
+      upstream_growth: {
+        overall: 31,
+        past_week: 34
+      },
+      network_performance: {
+        normal: 90,
+        elevated: 4,
+        substantially_elevated: 3,
+        severely_elevated: 3
+      },
+      providers: {
+         2560: {
+          name: 'Charter',
+          link: 'http://www.charter.net/'
+        },
+        2558: {
+          name: 'Comcast',
+          link: 'http://www.comcast.com/'
+        },
+        2567: {
+          name: 'Mediacom',
+          link: 'http://www.mediacomcable.com/'
+        }
+      }
+    },
+    IA: {
+      id: 'IA',
+      name: 'Iowa',
+      downstream_growth: {
+        overall: 25,
+        past_week: 31
+      },
+      upstream_growth: {
+        overall: 32,
+        past_week: 35
+      },
+      network_performance: {
+        normal: 91,
+        elevated: 3,
+        substantially_elevated: 3,
+        severely_elevated: 3
+      },
+      providers: {
+         2559: {
+          name: 'Cox',
+          link: 'http://www.cox.com/'
+        },
+        2567: {
+          name: 'Mediacom',
+          link: 'http://www.mediacomcable.com/'
+        }
+      }
+    },
+    KS: {
+      id: 'KS',
+      name: 'Kansas',
+      downstream_growth: {
+        overall: 23,
+        past_week: 29
+      },
+      upstream_growth: {
+        overall: 31,
+        past_week: 33
+      },
+      network_performance: {
+        normal: 92,
+        elevated: 2,
+        substantially_elevated: 3,
+        severely_elevated: 3
+      },
+      providers: {
+        2560: {
+          name: 'Charter',
+          link: 'http://www.charter.net/'
+        },
+        2558: {
+          name: 'Comcast',
+          link: 'http://www.comcast.com/'
+        },
+         2559: {
+          name: 'Cox',
+          link: 'http://www.cox.com/'
+        },
+        2566: {
+          name: 'Eagle Communications',
+          link: 'http://www.eaglecom.net/'
+        },
+        2567: {
+          name: 'Mediacom',
+          link: 'http://www.mediacomcable.com/'
+        },
+        2568: {
+          name: 'Midco',
+          link: 'http://www.midco.com/'
+        },
+        3604: {
+          name: 'Vyve',
+          link: 'http://www.vyvebroadband.com/'
+        }
+      }
+    },
+    KY: {
+      id: 'KY',
+      name: 'Kentucky',
+      downstream_growth: {
+        overall: 22,
+        past_week: 27
+      },
+      upstream_growth: {
+        overall: 34,
+        past_week: 37
+      },
+      network_performance: {
+        normal: 93,
+        elevated: 5,
+        substantially_elevated: 1,
+        severely_elevated: 1
+      },
+      providers: {
+        2560: {
+          name: 'Charter',
+          link: 'http://www.charter.net/'
+        },
+         2558: {
+          name: 'Comcast',
+          link: 'http://www.comcast.com/'
+        },
+        2567: {
+          name: 'Mediacom',
+          link: 'http://www.mediacomcable.com/'
+        }
+      }
+    },
+    LA: {
+      id: 'LA',
+      name: 'Louisiana',
+      downstream_growth: {
+        overall: 26,
+        past_week: 29
+      },
+      upstream_growth: {
+        overall: 32,
+        past_week: 38
+      },
+      network_performance: {
+        normal: 94,
+        elevated: 2,
+        substantially_elevated: 2,
+        severely_elevated: 2
+      },
+      providers: {
+         2560: {
+          name: 'Charter',
+          link: 'http://www.charter.net/'
+        },
+        2558: {
+          name: 'Comcast',
+          link: 'http://www.comcast.com/'
+        },
+        2559: {
+          name: 'Cox',
+          link: 'http://www.cox.com/'
+        },
+        3604: {
+          name: 'Vyve',
+          link: 'http://www.vyvebroadband.com/'
+        }
+      }
+    },
+    ME: {
+      id: 'ME',
+      name: 'Maine',
+      downstream_growth: {
+        overall: 25,
+        past_week: 28
+      },
+      upstream_growth: {
+        overall: 36,
+        past_week: 39
+      },
+      network_performance: {
+        normal: 84,
+        elevated: 10,
+        substantially_elevated: 3,
+        severely_elevated: 3
+      },
+      providers: {
+         2558: {
+          name: 'Comcast',
+          link: 'http://www.comcast.com/'
+        },
+        2560: {
+          name: 'Charter',
+          link: 'http://www.charter.net/'
+        }
+      }
+    },
+    MD: {
+      id: 'MD',
+      name: 'Maryland',
+      downstream_growth: {
+        overall: 28,
+        past_week: 33
+      },
+      upstream_growth: {
+        overall: 34,
+        past_week: 37
+      },
+      network_performance: {
+        normal: 82,
+        elevated: 10,
+        substantially_elevated: 5,
+        severely_elevated: 3
+      },
+      providers: {
+         2560: {
+          name: 'Charter',
+          link: 'http://www.charter.net/'
+        },
+        2558: {
+          name: 'Comcast',
+          link: 'http://www.comcast.com/'
+        },
+        2567: {
+          name: 'Mediacom',
+          link: 'http://www.mediacomcable.com/'
+        }
+      }
+    },
+    MA: {
+      id: 'MA',
+      name: 'Massachusetts',
+      downstream_growth: {
+        overall: 29,
+        past_week: 35
+      },
+      upstream_growth: {
+        overall: 32,
+        past_week: 38
+      },
+      network_performance: {
+        normal: 80,
+        elevated: 13,
+        substantially_elevated: 4,
+        severely_elevated: 3
+      },
+      providers: {
+         2560: {
+          name: 'Charter',
+          link: 'http://www.charter.net/'
+        },
+        2558: {
+          name: 'Comcast',
+          link: 'http://www.comcast.com/'
+        },
+        2559: {
+          name: 'Cox',
+          link: 'http://www.cox.com/'
+        }
+      }
+    },
+    MI: {
+      id: 'MI',
+      name: 'Michigan',
+      downstream_growth: {
+        overall: 31,
+        past_week: 34
+      },
+      upstream_growth: {
+        overall: 36,
+        past_week: 40
+      },
+      network_performance: {
+        normal: 81,
+        elevated: 12,
+        substantially_elevated: 3,
+        severely_elevated: 4
+      },
+      providers: {
+         2560: {
+          name: 'Charter',
+          link: 'http://www.charter.net/'
+        },
+        2558: {
+          name: 'Comcast',
+          link: 'http://www.comcast.com/'
+        },
+        2567: {
+          name: 'Mediacom',
+          link: 'http://www.mediacomcable.com/'
+        }
+      }
+    },
+    MN: {
+      id: 'MN',
+      name: 'Minnesota',
+      downstream_growth: {
+        overall: 23,
+        past_week: 28
+      },
+      upstream_growth: {
+        overall: 29,
+        past_week: 34
+      },
+      network_performance: {
+        normal: 84,
+        elevated: 6,
+        substantially_elevated: 6,
+        severely_elevated: 4
+      },
+      providers: {
+         2560: {
+          name: 'Charter',
+          link: 'http://www.charter.net/'
+        },
+        2558: {
+          name: 'Comcast',
+          link: 'http://www.comcast.com/'
+        },
+        2567: {
+          name: 'Mediacom',
+          link: 'http://www.mediacomcable.com/'
+        },
+        2568: {
+          name: 'Midco',
+          link: 'http://www.midco.com/'
+        },
+        2620: {
+          name: 'Sjoberg\'s',
+          link: 'http://trf.mncable.net/'
+        }
+      }
+    },
+    MS: {
+      id: 'MS',
+      name: 'Mississippi',
+      downstream_growth: {
+        overall: 26,
+        past_week: 29
+      },
+      upstream_growth: {
+        overall: 32,
+        past_week: 35
+      },
+      network_performance: {
+        normal: 87,
+        elevated: 5,
+        substantially_elevated: 4,
+        severely_elevated: 4
+      },
+      providers: {
+         2560: {
+          name: 'Charter',
+          link: 'http://www.charter.net/'
+        },
+        2558: {
+          name: 'Comcast',
+          link: 'http://www.comcast.com/'
+        },
+        2567: {
+          name: 'Mediacom',
+          link: 'http://www.mediacomcable.com/'
+        }
+      }
+    },
+    MO: {
+      id: 'MO',
+      name: 'Missouri',
+      downstream_growth: {
+        overall: 29,
+        past_week: 34
+      },
+      upstream_growth: {
+        overall: 37,
+        past_week: 39
+      },
+      network_performance: {
+        normal: 88,
+        elevated: 7,
+        substantially_elevated: 3,
+        severely_elevated: 2
+      },
+      providers: {
+         2560: {
+          name: 'Charter',
+          link: 'http://www.charter.net/'
+        },
+        2558: {
+          name: 'Comcast',
+          link: 'http://www.comcast.com/'
+        },
+        2567: {
+          name: 'Mediacom',
+          link: 'http://www.mediacomcable.com/'
+        }
+      }
+    },
+    MT: {
+      id: 'MT',
+      name: 'Montana',
+      downstream_growth: {
+        overall: 27,
+        past_week: 32
+      },
+      upstream_growth: {
+        overall: 35,
+        past_week: 38
+      },
+      network_performance: {
+        normal: 89,
+        elevated: 5,
+        substantially_elevated: 3,
+        severely_elevated: 3
+      },
+      providers: {
+         2560: {
+          name: 'Charter',
+          link: 'http://www.charter.net/'
+        }
+      }
+    },
+    NE: {
+      id: 'NE',
+      name: 'Nebraska',
+      downstream_growth: {
+        overall: 21,
+        past_week: 28
+      },
+      upstream_growth: {
+        overall: 29,
+        past_week: 36
+      },
+      network_performance: {
+        normal: 92,
+        elevated: 4,
+        substantially_elevated: 2,
+        severely_elevated: 2
+      },
+      providers: {
+         2560: {
+          name: 'Charter',
+          link: 'http://www.charter.net/'
+        },
+        2559: {
+          name: 'Cox',
+          link: 'http://www.cox.com/'
+        },
+        2566: {
+          name: 'Eagle Communications',
+          link: 'http://www.eaglecom.net/'
+        }
+      }
+    },
+    NV: {
+      id: 'NV',
+      name: 'Nevada',
+      downstream_growth: {
+        overall: 25,
+        past_week: 29
+      },
+      upstream_growth: {
+        overall: 26,
+        past_week: 37
+      },
+      network_performance: {
+        normal: 84,
+        elevated: 8,
+        substantially_elevated: 4,
+        severely_elevated: 4
+      },
+      providers: {
+         2560: {
+          name: 'Charter',
+          link: 'http://www.charter.net/'
+        },
+        2559: {
+          name: 'Cox',
+          link: 'http://www.cox.com/'
+        }
+      }
+    },
+    NH: {
+      id: 'NH',
+      name: 'New Hampshire',
+      downstream_growth: {
+        overall: 31,
+        past_week: 36
+      },
+      upstream_growth: {
+        overall: 35,
+        past_week: 40
+      },
+      network_performance: {
+        normal: 88,
+        elevated: 6,
+        substantially_elevated: 3,
+        severely_elevated: 3
+      },
+      providers: {
+         2560: {
+          name: 'Charter',
+          link: 'http://www.charter.net/'
+        },
+        2558: {
+          name: 'Comcast',
+          link: 'http://www.comcast.com/'
+        }
+      }
+    },
+    NJ: {
+      id: 'NJ',
+      name: 'New Jersey',
+      downstream_growth: {
+        overall: 33,
+        past_week: 36
+      },
+      upstream_growth: {
+        overall: 38,
+        past_week: 40
+      },
+      network_performance: {
+        normal: 89,
+        elevated: 6,
+        substantially_elevated: 2,
+        severely_elevated: 3
+      },
+      providers: {
+        2560: {
+          name: 'Charter',
+          link: 'http://www.charter.net/'
+        },
+        2558: {
+          name: 'Comcast',
+          link: 'http://www.comcast.com/'
+        },
+        2570: {
+          name: 'Service Electric Cable TV &amp; Communications',
+          link: 'http://www.sectv.com/'
+        }
+      }
+    },
+    NM: {
+      id: 'NM',
+      name: 'New Mexico',
+      downstream_growth: {
+        overall: 35,
+        past_week: 38
+      },
+      upstream_growth: {
+        overall: 36,
+        past_week: 40
+      },
+      network_performance: {
+        normal: 87,
+        elevated: 8,
+        substantially_elevated: 2,
+        severely_elevated: 3
+      },
+      providers: {
+        2560: {
+          name: 'Charter',
+          link: 'http://www.charter.net/'
+        },
+         2558: {
+          name: 'Comcast',
+          link: 'http://www.comcast.com/'
+        }
+      }
+    },
+    NY: {
+      id: 'NY',
+      name: 'New York',
+      downstream_growth: {
+        overall: 33,
+        past_week: 38
+      },
+      upstream_growth: {
+        overall: 34,
+        past_week: 40
+      },
+      network_performance: {
+        normal: 86,
+        elevated: 7,
+        substantially_elevated: 4,
+        severely_elevated: 3
+      },
+      providers: {
+        2560: {
+          name: 'Charter',
+          link: 'http://www.charter.net/'
+        },
+        2558: {
+          name: 'Comcast',
+          link: 'http://www.comcast.com/'
+        },
+        2567: {
+          name: 'Mediacom',
+          link: 'http://www.mediacomcable.com/'
+        }
+      }
+    },
+    NC: {
+      id: 'NC',
+      name: 'North Carolina',
+      downstream_growth: {
+        overall: 27,
+        past_week: 35
+      },
+      upstream_growth: {
+        overall: 32,
+        past_week: 39
+      },
+      network_performance: {
+        normal: 85,
+        elevated: 9,
+        substantially_elevated: 3,
+        severely_elevated: 3
+      },
+      providers: {
+         2560: {
+          name: 'Charter',
+          link: 'http://www.charter.net/'
+        },
+        2558: {
+          name: 'Comcast',
+          link: 'http://www.comcast.com/'
+        },
+        2559: {
+          name: 'Cox',
+          link: 'http://www.cox.com/'
+        },
+        2567: {
+          name: 'Mediacom',
+          link: 'http://www.mediacomcable.com/'
+        }
+      }
+    },
+    ND: {
+      id: 'ND',
+      name: 'North Dakota',
+      downstream_growth: {
+        overall: 25,
+        past_week: 33
+      },
+      upstream_growth: {
+        overall: 31,
+        past_week: 37
+      },
+      network_performance: {
+        normal: 82,
+        elevated: 8,
+        substantially_elevated: 5,
+        severely_elevated: 5
+      },
+      providers: {
+         2568: {
+          name: 'Midco',
+          link: 'http://www.midco.com/'
+        }
+      }
+    },
+    OH: {
+      id: 'OH',
+      name: 'Ohio',
+      downstream_growth: {
+        overall: 22,
+        past_week: 31
+      },
+      upstream_growth: {
+        overall: 33,
+        past_week: 36
+      },
+      network_performance: {
+        normal: 86,
+        elevated: 4,
+        substantially_elevated: 5,
+        severely_elevated: 5
+      },
+      providers: {
+        2560: {
+          name: 'Charter',
+          link: 'http://www.charter.net/'
+        },
+         2558: {
+          name: 'Comcast',
+          link: 'http://www.comcast.com/'
+        },
+        2559: {
+          name: 'Cox',
+          link: 'http://www.cox.com/'
+        },
+        2567: {
+          name: 'Mediacom',
+          link: 'http://www.mediacomcable.com/'
+        }
+      }
+    },
+    OK: {
+      id: 'OK',
+      name: 'Oklahoma',
+      downstream_growth: {
+        overall: 24,
+        past_week: 32
+      },
+      upstream_growth: {
+        overall: 23,
+        past_week: 36
+      },
+      network_performance: {
+        normal: 85,
+        elevated: 4,
+        substantially_elevated: 6,
+        severely_elevated: 5
+      },
+      providers: {
+         2559: {
+          name: 'Cox',
+          link: 'http://www.cox.com/'
+        },
+        3604: {
+          name: 'Vyve',
+          link: 'http://www.vyvebroadband.com/'
+        }
+      }
+    },
+    OR: {
+      id: 'OR',
+      name: 'Oregon',
+      downstream_growth: {
+        overall: 26,
+        past_week: 31
+      },
+      upstream_growth: {
+        overall: 23,
+        past_week: 39
+      },
+      network_performance: {
+        normal: 87,
+        elevated: 8,
+        substantially_elevated: 2,
+        severely_elevated: 3
+      },
+      providers: {
+         2560: {
+          name: 'Charter',
+          link: 'http://www.charter.net/'
+        },
+        2558: {
+          name: 'Comcast',
+          link: 'http://www.comcast.com/'
+        }
+      }
+    },
+    PA: {
+      id: 'PA',
+      name: 'Pennsylvania',
+      downstream_growth: {
+        overall: 28,
+        past_week: 37
+      },
+      upstream_growth: {
+        overall: 28,
+        past_week: 39
+      },
+      network_performance: {
+        normal: 89,
+        elevated: 8,
+        substantially_elevated: 2,
+        severely_elevated: 1
+      },
+      providers: {
+         2560: {
+          name: 'Charter',
+          link: 'http://www.charter.net/'
+        },
+        2558: {
+          name: 'Comcast',
+          link: 'http://www.comcast.com/'
+        },
+        2570: {
+          name: 'Service Electric Cable TV &amp; Communications',
+          link: 'http://www.sectv.com/'
+        }
+      }
+    },
+    RI: {
+      id: 'RI',
+      name: 'Rhode Island',
+      downstream_growth: {
+        overall: 26,
+        past_week: 36
+      },
+      upstream_growth: {
+        overall: 27,
+        past_week: 37
+      },
+      network_performance: {
+        normal: 85,
+        elevated: 6,
+        substantially_elevated: 5,
+        severely_elevated: 4
+      },
+      providers: {
+         2559: {
+          name: 'Cox',
+          link: 'http://www.cox.com/'
+        }
+      }
+    },
+    SC: {
+      id: 'SC',
+      name: 'South Carolina',
+      downstream_growth: {
+        overall: 25,
+        past_week: 34
+      },
+      upstream_growth: {
+        overall: 24,
+        past_week: 31
+      },
+      network_performance: {
+        normal: 89,
+        elevated: 4,
+        substantially_elevated: 6,
+        severely_elevated: 1
+      },
+      providers: {
+         2560: {
+          name: 'Charter',
+          link: 'http://www.charter.net/'
+        },
+        2558: {
+          name: 'Comcast',
+          link: 'http://www.comcast.com/'
+        }
+      }
+    },
+    SD: {
+      id: 'SD',
+      name: 'South Dakota',
+      downstream_growth: {
+        overall: 27,
+        past_week: 32
+      },
+      upstream_growth: {
+        overall: 23,
+        past_week: 32
+      },
+      network_performance: {
+        normal: 91,
+        elevated: 4,
+        substantially_elevated: 3,
+        severely_elevated: 2
+      },
+      providers: {
+         2567: {
+          name: 'Mediacom',
+          link: 'http://www.mediacomcable.com/'
+        },
+        2568: {
+          name: 'Midco',
+          link: 'http://www.midco.com/'
+        }
+      }
+    },
+    TN: {
+      id: 'TN',
+      name: 'Tennessee',
+      downstream_growth: {
+        overall: 29,
+        past_week: 36
+      },
+      upstream_growth: {
+        overall: 22,
+        past_week: 31
+      },
+      network_performance: {
+        normal: 92,
+        elevated: 3,
+        substantially_elevated: 3,
+        severely_elevated: 2
+      },
+      providers: {
+         2560: {
+          name: 'Charter',
+          link: 'http://www.charter.net/'
+        },
+        2558: {
+          name: 'Comcast',
+          link: 'http://www.comcast.com/'
+        },
+        2567: {
+          name: 'Mediacom',
+          link: 'http://www.mediacomcable.com/'
+        },
+        3604: {
+          name: 'Vyve',
+          link: 'http://www.vyvebroadband.com/'
+        }
+      }
+    },
+    TX: {
+      id: 'TX',
+      name: 'Texas',
+      downstream_growth: {
+        overall: 30,
+        past_week: 35
+      },
+      upstream_growth: {
+        overall: 23,
+        past_week: 29
+      },
+      network_performance: {
+        normal: 94,
+        elevated: 3,
+        substantially_elevated: 2,
+        severely_elevated: 1
+      },
+      providers: {
+         2560: {
+          name: 'Charter',
+          link: 'http://www.charter.net/'
+        },
+        2558: {
+          name: 'Comcast',
+          link: 'http://www.comcast.com/'
+        },
+        3604: {
+          name: 'Vyve',
+          link: 'http://www.vyvebroadband.com/'
+        }
+      }
+    },
+    UT: {
+      id: 'UT',
+      name: 'Utah',
+      downstream_growth: {
+        overall: 33,
+        past_week: 38
+      },
+      upstream_growth: {
+        overall: 22,
+        past_week: 28
+      },
+      network_performance: {
+        normal: 93,
+        elevated: 3,
+        substantially_elevated: 2,
+        severely_elevated: 2
+      },
+      providers: {
+         2558: {
+          name: 'Comcast',
+          link: 'http://www.comcast.com/'
+        }
+      }
+    },
+    VT: {
+      id: 'VT',
+      name: 'Vermont',
+      downstream_growth: {
+        overall: 34,
+        past_week: 36
+      },
+      upstream_growth: {
+        overall: 23,
+        past_week: 27
+      },
+      network_performance: {
+        normal: 91,
+        elevated: 5,
+        substantially_elevated: 2,
+        severely_elevated: 2
+      },
+      providers: {
+         2560: {
+          name: 'Charter',
+          link: 'http://www.charter.net/'
+        },
+        2558: {
+          name: 'Comcast',
+          link: 'http://www.comcast.com/'
+        }
+      }
+    },
+    VA: {
+      id: 'VA',
+      name: 'Virginia',
+      downstream_growth: {
+        overall: 37,
+        past_week: 39
+      },
+      upstream_growth: {
+        overall: 26,
+        past_week: 29
+      },
+      network_performance: {
+        normal: 84,
+        elevated: 6,
+        substantially_elevated: 6,
+        severely_elevated: 4
+      },
+      providers: {
+         2560: {
+          name: 'Charter',
+          link: 'http://www.charter.net/'
+        },
+        2558: {
+          name: 'Comcast',
+          link: 'http://www.comcast.com/'
+        },
+        2559: {
+          name: 'Cox',
+          link: 'http://www.cox.com/'
+        }
+      }
+    },
+    WA: {
+      id: 'WA',
+      name: 'Washington',
+      downstream_growth: {
+        overall: 38,
+        past_week: 40
+      },
+      upstream_growth: {
+        overall: 28,
+        past_week: 30
+      },
+      network_performance: {
+        normal: 83,
+        elevated: 6,
+        substantially_elevated: 6,
+        severely_elevated: 5
+      },
+      providers: {
+         2560: {
+          name: 'Charter',
+          link: 'http://www.charter.net/'
+        },
+        2558: {
+          name: 'Comcast',
+          link: 'http://www.comcast.com/'
+        }
+      }
+    },
+    WV: {
+      id: 'WV',
+      name: 'West Virginia',
+      downstream_growth: {
+        overall: 36,
+        past_week: 39
+      },
+      upstream_growth: {
+        overall: 27,
+        past_week: 32
+      },
+      network_performance: {
+        normal: 85,
+        elevated: 4,
+        substantially_elevated: 6,
+        severely_elevated: 5
+      },
+      providers: {
+         2558: {
+          name: 'Comcast',
+          link: 'http://www.comcast.com/'
+        },
+        2560: {
+          name: 'Charter',
+          link: 'http://www.charter.net'
+        }
+      }
+    },
+    WI: {
+      id: 'WI',
+      name: 'Wisconsin',
+      downstream_growth: {
+        overall: 34,
+        past_week: 38
+      },
+      upstream_growth: {
+        overall: 26,
+        past_week: 31
+      },
+      network_performance: {
+        normal: 88,
+        elevated: 6,
+        substantially_elevated: 2,
+        severely_elevated: 2
+      },
+      providers: {
+         2560: {
+          name: 'Charter',
+          link: 'http://www.charter.net/'
+        },
+        2558: {
+          name: 'Comcast',
+          link: 'http://www.comcast.com/'
+        },
+        2567: {
+          name: 'Mediacom',
+          link: 'http://www.mediacomcable.com/'
+        },
+        2568: {
+          name: 'Midco',
+          link: 'http://www.midco.com/'
+        }
+      }
+    },
+    WY: {
+      id: 'WY',
+      name: 'Wyoming',
+      downstream_growth: {
+        overall: 32,
+        past_week: 39
+      },
+      upstream_growth: {
+        overall: 22,
+        past_week: 32
+      },
+      network_performance: {
+        normal: 87,
+        elevated: 5,
+        substantially_elevated: 5,
+        severely_elevated: 2
+      },
+      providers: {
+         2560: {
+          name: 'Charter',
+          link: 'http://www.charter.net/'
+        },
+        3604: {
+          name: 'Vyve',
+          link: 'http://www.vyvebroadband.com/'
+        }
+      }
+    }
+  }
+
+  //--><!]]>
+  </script>
+
+
+  <script src="js/jquery.min.js"></script>
+  <script src="js/select2.min.js"></script>
+  <script src="js/d3.v3.min.js"></script>
+  <script src="js/broadband_metrics.js"></script>
+
+
+</body>
+
+</html>
