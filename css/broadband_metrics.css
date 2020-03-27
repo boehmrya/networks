@@ -34,7 +34,8 @@ h2.metrics-section-title {
 .metrics-content-wrap::after,
 .metrics-content-wrap .downstream-growth::after,
 .metrics-content-wrap .upstream-growth::after,
-.metrics-content-wrap .performance .bars::after {
+.metrics-content-wrap .performance .bars::after,
+.metrics-content-wrap .performance .figures-legend .legend-row::after {
   content: "";
   clear: both;
   display: table;
@@ -56,7 +57,8 @@ h2.metrics-section-title {
 }
 
 .metrics-content-wrap .downstream-growth,
-.metrics-content-wrap .upstream-growth {
+.metrics-content-wrap .upstream-growth,
+.metrics-content-wrap .performance {
   margin-bottom: 20px;
 }
 
@@ -70,7 +72,8 @@ h2.metrics-section-title {
 
 .metrics-content-wrap .downstream-growth-title,
 .metrics-content-wrap .upstream-growth-title,
-.metrics-content-wrap .performance-title {
+.metrics-content-wrap .performance-title,
+.metrics-content-wrap .isp-title {
   color: #343F49;
   font-size: 1.5rem;
   padding-bottom: 5px;
@@ -117,12 +120,13 @@ h2.metrics-section-title {
 }
 
 .metrics-content-wrap .performance .bars {
-  height: 40px;
+  height: 35px;
   width: 250px;
+  margin-bottom: 15px;
 }
 
 .metrics-content-wrap .performance .bars .bar {
-  height: 40px;
+  height: 35px;
   float: left;
 }
 
@@ -139,6 +143,44 @@ h2.metrics-section-title {
 }
 
 .metrics-content-wrap .performance .bars #bar-severely-elevated {
+  background: #e71b4f;
+}
+
+.metrics-content-wrap .performance .figures-legend .legend-row {
+  margin-bottom: 10px;
+}
+
+.metrics-content-wrap .performance .figures-legend .figure,
+.metrics-content-wrap .performance .figures-legend .key,
+.metrics-content-wrap .performance .figures-legend .label {
+  float: left;
+  margin-right: 8px;
+}
+
+.metrics-content-wrap .performance .figures-legend .figure {
+  font-weight: bold;
+  width: 35px;
+  text-align: center;
+}
+
+.metrics-content-wrap .performance .figures-legend .key {
+  width: 15px;
+  height: 15px;
+}
+
+.metrics-content-wrap .performance .figures-legend .key.green {
+  background: #00AC92;
+}
+
+.metrics-content-wrap .performance .figures-legend .key.yellow {
+  background: #FED241;
+}
+
+.metrics-content-wrap .performance .figures-legend .key.orange {
+  background: #ed6660;
+}
+
+.metrics-content-wrap .performance .figures-legend .key.red {
   background: #e71b4f;
 }
 
