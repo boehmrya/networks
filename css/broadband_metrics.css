@@ -36,10 +36,15 @@ h2.metrics-section-title {
 .metrics-content-wrap .upstream-growth::after,
 .metrics-content-wrap .performance .bars::after,
 .metrics-content-wrap .performance .figures-legend .legend-row::after,
-.metrics-content-wrap .isp-operators #isp-operator-names::after {
+.metrics-content-wrap .isp-operators #isp-operator-names::after,
+#broadband-metrics-small-states .small-state::after {
   content: "";
   clear: both;
   display: table;
+}
+
+.metrics-content-wrap {
+  position: relative;
 }
 
 .metrics-content-wrap .data-col {
@@ -186,6 +191,10 @@ h2.metrics-section-title {
   background: #e71b4f;
 }
 
+.metrics-content-wrap .isp-operators {
+  min-height: 120px;
+}
+
 .metrics-content-wrap .isp-operators .provider {
   float: left;
   margin-right: 15px;
@@ -201,6 +210,113 @@ h2.metrics-section-title {
 .metrics-content-wrap .isp-operators .provider a:hover {
   border-bottom: 2px solid #343F49;
 }
+
+.metrics-content-wrap #broadband-metrics-small-states {
+  clear: both;
+  position: absolute;
+  right: -15px;
+  width: 60px;
+  bottom: 100px;
+}
+
+.metrics-content-wrap #broadband-metrics-small-states .small-state {
+  margin-bottom: 10px;
+}
+
+.metrics-content-wrap #broadband-metrics-small-states .small-state .box {
+  float: left;
+  margin-right: 10px;
+  width: 20px;
+  height: 20px;
+  background: #343F49;
+  cursor: pointer;
+}
+
+.metrics-content-wrap #broadband-metrics-small-states .small-state .box:hover {
+  background: #8c489a !important;
+}
+
+.metrics-content-wrap #broadband-metrics-small-states .small-state .box-text {
+  font-size: 1.125rem;
+}
+
+.metrics-wrap .bottom-notes-sources .notes,
+.metrics-wrap .bottom-notes-sources .sources {
+  padding: 20px 0px;
+  border-bottom: 1px solid #343F49;
+}
+
+.metrics-wrap .bottom-notes-sources .notes .notes-description,
+.metrics-wrap .bottom-notes-sources .sources .sources-description  {
+  display: none;
+}
+
+.metrics-wrap .bottom-notes-sources .notes .notes-title,
+.metrics-wrap .bottom-notes-sources .sources .sources-title {
+  font-weight: bold;
+  text-transform: uppercase;
+  cursor: pointer;
+  position: relative;
+}
+
+.metrics-wrap .bottom-notes-sources .notes .notes-title .arrow,
+.metrics-wrap .bottom-notes-sources .sources .sources-title .arrow {
+  height: 26px;
+  position: absolute;
+  top: 1px;
+  right: 1px;
+  width: 20px;
+}
+
+.metrics-wrap .bottom-notes-sources .notes .notes-description div {
+  padding-bottom: 3px;
+}
+
+.metrics-wrap .bottom-notes-sources .notes .notes-description,
+.metrics-wrap .bottom-notes-sources .sources .sources-description {
+  padding-top: 10px;
+}
+
+.metrics-wrap .bottom-notes-sources .notes .notes-description .green {
+  color: #00AC92;
+}
+
+.metrics-wrap .bottom-notes-sources .notes .notes-description .yellow {
+  color: #FED241;
+}
+
+.metrics-wrap .bottom-notes-sources .notes .notes-description .orange {
+  color: #ed6660;
+}
+
+.metrics-wrap .bottom-notes-sources .notes .notes-description .red {
+  color: #e71b4f;
+}
+
+.metrics-wrap .bottom-notes-sources .notes .notes-title .arrow b,
+.metrics-wrap .bottom-notes-sources .sources .sources-title .arrow b {
+  border-style: initial;
+  border-width: initial;
+  border-color: initial;
+  margin-left: 0;
+  margin-top: 0;
+  left: initial;
+  right: 10px;
+  position: absolute;
+  border-bottom: 3px solid #343F49;
+  border-right: 3px solid #343F49;
+  transform-origin: 66% 66%;
+  transform: rotate(45deg);
+  transition: all .15s ease-in-out;
+  height: 10px;
+  width: 10px;
+}
+
+.metrics-wrap .bottom-notes-sources .notes.active .notes-title .arrow b,
+.metrics-wrap .bottom-notes-sources .sources.active .sources-title .arrow b {
+  transform: rotate(225deg);
+}
+
 
 
 

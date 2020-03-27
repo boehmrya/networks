@@ -1686,6 +1686,18 @@ var state_id =  {
   }
 
 
+// to handle lookups to detect when small states are clicked
+var small_states =  {
+    'VT': 'Vermont',
+    'NH': 'New Hampshire',
+    'MA': 'Massachusetts',
+    'RI': 'Rhode Island',
+    'CT': 'Connecticut',
+    'NJ': 'New Jersey',
+    'DE': 'Delaware',
+    'MD': 'Maryland',
+    'DC': 'District of Columbia'
+};
 
 
 jQuery(function($){
@@ -1765,6 +1777,16 @@ jQuery(function($){
         d3.select(this).attr('class', 'active'); // add active class to current element
         d3.select(this).style('fill', 'rgb(140, 72, 154)'); // fill current clicked state with blue
 
+        // clear colors on all existing small boxes
+        $('#broadband-metrics-small-states .small-state .box').css('background', '#343F49');
+
+        // check if it is a small state
+        // if so, find the box and make it purple
+        if (small_states.hasOwnProperty(state_id[d.id])) {
+          var state_box_id = '#' + state_id[d.id] + '-Box';
+          $(state_box_id).css('background', '#8c489a');
+        }
+
         // update the select list to the chosen state
         $("#filterFormStateSelect").val(state_id[d.id]).trigger('change');
         // run update data function
@@ -1784,6 +1806,16 @@ jQuery(function($){
         d3.selectAll('path').style({ 'fill': 'rgb(52, 63, 73)' }); // clear all colors
         d3.select(selected_elem).attr('class', 'active'); // add active class to current element
         d3.select(selected_elem).style('fill', 'rgb(140, 72, 154)'); // fill current clicked state with blue
+
+        // clear colors on all existing small boxes
+        $('#broadband-metrics-small-states .small-state .box').css('background', '#343F49');
+
+        // check if it is a small state
+        // if so, find the box and make it purple
+        if (small_states.hasOwnProperty(selected)) {
+          var state_box_id = '#' + selected + '-Box';
+          $(state_box_id).css('background', '#8c489a');
+        }
 
         // update data in sidebar
         updateData(selected);
@@ -1850,6 +1882,39 @@ jQuery(function($){
 
     // convert select list into custom menu
     $('#filterFormStateSelect').select2();
+
+    // trigger events when small boxes are clicked
+    $('#broadband-metrics-small-states .small-state .box').on('click', function() {
+      // clear colors on all existing small boxes
+      $('#broadband-metrics-small-states .small-state .box').css('background', '#343F49');
+
+      // make background of this small box purple
+      $(this).css('background', '#8c489a');
+
+      // split the id on the box to get the state abbreviation
+      var box_id = $(this).attr('id');
+      var box_id_parts = box_id.split("-");
+      var box_state = box_id_parts[0];
+
+      // set value in the select list and trigger an on change event
+      $("#filterFormStateSelect").val(box_state).trigger('change');
+    });
+
+    // accordion toggle
+    $('.metrics-wrap .bottom-notes-sources .notes .notes-title').on('click', function () {
+      console.log('click');
+        $(this).parents('.notes').toggleClass('active');
+        $(this).toggleClass('active');
+        $(this).next().slideToggle();
+    });
+
+    // collapsible item toggle
+    $('.metrics-wrap .bottom-notes-sources .sources .sources-title').on('click', function () {
+        console.log('click');
+        $(this).parents('.sources').toggleClass('active');
+        $(this).toggleClass('active');
+        $(this).next().slideToggle();
+    });
 
     updateData('US');
   });
