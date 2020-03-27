@@ -1709,16 +1709,28 @@ jQuery(function($){
   });
   */
 
-  var w, width, height, wScale, hScale, mapSize;
+  var w, width, height, wScale, hScale, mapSize, mapRatio;
 
   w = $(window).width();
   //Width and height of map
-  if (w > 1280) {
+  width = parseInt(d3.select('#broadband-metrics-map').style('width'));
+  mapRatio = .71
+  height = width * mapRatio;
+
+  if (w > 992) {
+    mapSize = 1.4 * width;
+  }
+  else {
+    mapSize = 0.5 * width;
+  }
+
+  /*
+  if (w > 1200) {
     width = 740;
     height = 523;
     mapSize = 1000;
   }
-  else if (w > 1200) {
+  else if (w < 1200) {
     width = 700;
     height = 496;
     mapSize = 900;
@@ -1728,11 +1740,12 @@ jQuery(function($){
     height = 434;
     mapSize = 800;
   }
+  */
 
   // D3 Projection
   var projection = d3.geo.albersUsa()
   				   .translate([width/2, height/2.2])    // translate to center of screen
-  				   .scale([mapSize]);          // scale things down so see entire US
+  				   .scale([1.4 * width]);          // scale things down so see entire US
 
   // Define path generator
   var path = d3.geo.path()               // path generator that will convert GeoJSON to SVG paths
@@ -1902,7 +1915,6 @@ jQuery(function($){
 
     // accordion toggle
     $('.metrics-wrap .bottom-notes-sources .notes .notes-title').on('click', function () {
-      console.log('click');
         $(this).parents('.notes').toggleClass('active');
         $(this).toggleClass('active');
         $(this).next().slideToggle();
@@ -1910,7 +1922,6 @@ jQuery(function($){
 
     // collapsible item toggle
     $('.metrics-wrap .bottom-notes-sources .sources .sources-title').on('click', function () {
-        console.log('click');
         $(this).parents('.sources').toggleClass('active');
         $(this).toggleClass('active');
         $(this).next().slideToggle();

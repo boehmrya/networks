@@ -10,8 +10,22 @@ bright purple: 8c489a
 */
 
 .metrics-wrap {
-  max-width: 1140px;
+  width: 1140px;
   margin: 40px auto;
+  box-sizing: border-box;
+}
+
+@media all and (max-width: 1199px) {
+  .metrics-wrap {
+    width: 940px;
+  }
+}
+
+@media all and (max-width: 991px) {
+  .metrics-wrap {
+    width: 100%;
+    padding: 0px 40px;
+  }
 }
 
 path.state {
@@ -398,4 +412,115 @@ h2.metrics-section-title {
 .select2-container--default .select2-results__option--highlighted[aria-selected] {
     background-color: #d8d8d8!important;
     color: #343F49;
+}
+
+
+@media all and (max-width: 1199px) {
+  .metrics-content-wrap #broadband-metrics-map {
+    width: 614px;
+  }
+  .metrics-content-wrap .data-col {
+    width: 280px;
+    margin-right: 40px;
+  }
+  .metrics-content-wrap #broadband-metrics-small-states {
+    bottom: 160px;
+  }
+  .metrics-content-wrap .performance .figures-legend .label {
+    max-width: 180px;
+  }
+  .metrics-content-wrap .downstream-growth-title,
+  .metrics-content-wrap .upstream-growth-title,
+  .metrics-content-wrap .performance-title,
+  .metrics-content-wrap .isp-title {
+    font-size: 1.35rem;
+  }
+}
+
+@media all and (max-width: 991px) {
+  .metrics-content-wrap .data-col {
+    float: none;
+    margin-bottom: 30px;
+    width: 100%;
+  }
+  .metrics-content-wrap .data-col::after {
+    content: "";
+    clear: both;
+    display: table;
+  }
+  .metrics-content-wrap #broadband-metrics-map {
+    float: none;
+    width: 100%;
+    margin-bottom: 30px;
+  }
+  .metrics-content-wrap #broadband-metrics-small-states {
+    position: static;
+    width: auto;
+  }
+  .metrics-content-wrap #broadband-metrics-small-states .small-state {
+    float: left;
+    margin-right: 15px;
+  }
+  .metrics-content-wrap #broadband-metrics-small-states .small-state .box {
+    float: none;
+    margin-right: 0;
+    margin-bottom: 10px;
+  }
+  .metrics-content-wrap .select2-container--default {
+    max-width: 50%;
+  }
+  .downstream-growth {
+    width: 48%;
+    float: left;
+    margin-right: 4%;
+  }
+  .upstream-growth {
+    width: 48%;
+    float: left;
+  }
+  .metrics-content-wrap .performance {
+    clear: left;
+    width: 48%;
+    float: left;
+    margin-right: 4%;
+  }
+  .metrics-content-wrap .isp-operators {
+    float: left;
+    width: 48%;
+  }
+}
+@media all and (max-width: 767px) {
+  .metrics-content-wrap .select2-container--default {
+    max-width: 100%;
+  }
+  .downstream-growth {
+    width: 100%;
+    max-width: 400px;
+    float: none;
+    margin: 0 auto 30px auto;
+  }
+  .upstream-growth {
+    width: 100%;
+    max-width: 400px;
+    float: none;
+    margin: 0 auto 30px auto;
+  }
+  .metrics-content-wrap .performance {
+    width: 100%;
+    max-width: 400px;
+    float: none;
+    margin: 0 auto 30px auto;
+  }
+  .metrics-content-wrap .isp-operators {
+    width: 100%;
+    max-width: 400px;
+    float: none;
+    margin: 0 auto 30px auto;
+  }
+  .metrics-content-wrap .downstream-growth-title,
+  .metrics-content-wrap .upstream-growth-title,
+  .metrics-content-wrap .performance-title,
+  .metrics-content-wrap .isp-title {
+    font-size: 1.5rem;
+  }
 }
