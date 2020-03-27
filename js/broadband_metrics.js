@@ -1,7 +1,6 @@
 var state_id =  {
     '01': 'AL',
     '02': 'AK',
-    '03': 'AS',
     '04': 'AZ',
     '05': 'AR',
     '06': 'CA',
@@ -11,7 +10,6 @@ var state_id =  {
     '11': 'DC',
     '12': 'FL',
     '13': 'GA',
-    '14': 'GU',
     '15': 'HI',
     '16': 'ID',
     '17': 'IL',
@@ -1696,6 +1694,13 @@ var state_id =  {
 
 jQuery(function($){
 
+  // populate the state dropdown
+  /*
+  $.each(data_states, function(i, v){
+    $("#filterFormStateSelect").append("<option value=\""+ i +"\">" + this.name + "</option>");
+  });
+  */
+
   var w, width, height, wScale, hScale, mapSize;
 
   w = $(window).width();
@@ -1746,11 +1751,11 @@ jQuery(function($){
       .attr("class", 'state')
       .style("cursor", "pointer")
       .style("stroke", "rgb(255,255,255)")
-      .style("stroke-width", "1")
+      .style("stroke-width", "1.5")
       .style("fill", "rgb(52, 63, 73)")
       .on('mouseover', function(d, i) {
         if (!d3.select(this).classed('active')) {
-          d3.select(this).style('fill', 'rgb(198, 242, 255)'); // change to blue on hover
+          d3.select(this).style('fill', 'rgb(140, 72, 154)'); // change to blue on hover
         }
       })
       .on('mouseout', function(d, i) {
@@ -1762,18 +1767,14 @@ jQuery(function($){
         d3.selectAll('path').classed('active', false); // remove active classes
         d3.selectAll('path').style({ 'fill': 'rgb(52, 63, 73)' }); // clear all colors
         d3.select(this).attr('class', 'active'); // add active class to current element
-        d3.select(this).style('fill', 'rgb(90, 201, 231)'); // fill current clicked state with blue
+        d3.select(this).style('fill', 'rgb(140, 72, 154)'); // fill current clicked state with blue
 
+        // update the select list to the chosen state
+        $("#filterFormStateSelect").val(state_id[d.id]).trigger('change');
         // run update data function
         updateData(state_id[d.id]);
       });
 
-    });
-
-
-    // populate the state dropdown
-    $.each(data_states, function(i, v){
-      $("#filterFormStateSelect").append("<option value=\""+ i +"\">" + this.name + "</option>");
     });
 
     // trigger map click events on select list change events
@@ -1781,13 +1782,12 @@ jQuery(function($){
       $("#filterFormStateSelect option:selected").each(function(){
         var selected = $(this).val();
         var selected_elem = '#broadband-metrics-map svg #' + selected;
-        console.log(selected_elem);
 
         // update the map
         d3.selectAll('path').classed('active', false); // remove active classes
         d3.selectAll('path').style({ 'fill': 'rgb(52, 63, 73)' }); // clear all colors
         d3.select(selected_elem).attr('class', 'active'); // add active class to current element
-        d3.select(selected_elem).style('fill', 'rgb(90, 201, 231)'); // fill current clicked state with blue
+        d3.select(selected_elem).style('fill', 'rgb(140, 72, 154)'); // fill current clicked state with blue
 
         // update data in sidebar
         updateData(selected);
@@ -1825,7 +1825,10 @@ jQuery(function($){
       $("#performance-severely-elevated").text(performance_severely_elevated);
 
       // add style percentage widths to performance bar
-
+      $("#bar-normal").css("width", performance_normal + '%');
+      $("#bar-elevated").css("width", performance_elevated + '%');
+      $("#bar-substantially-elevated").css("width", performance_substantially_elevated + '%');
+      $("#bar-severely-elevated").css("width", performance_severely_elevated + '%');
 
 
       // fill in cale isps with name and link
@@ -1846,11 +1849,11 @@ jQuery(function($){
                 jQuery("#isp-operator-names").append("<div class=\"provider\"><a href=\"" + this.link + "\" target=\"_blank\">" + this.name + "</a></div>");
           });
       }
-
-      // update the select list to the chosen state
-      $("#filterFormStateSelect").val(state_id);
     }
     // end updateData function
 
+    // convert select list into custom menu
+    $('#filterFormStateSelect').select2();
 
+    updateData('US');
   });
