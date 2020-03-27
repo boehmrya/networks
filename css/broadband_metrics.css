@@ -35,7 +35,8 @@ h2.metrics-section-title {
 .metrics-content-wrap .downstream-growth::after,
 .metrics-content-wrap .upstream-growth::after,
 .metrics-content-wrap .performance .bars::after,
-.metrics-content-wrap .performance .figures-legend .legend-row::after {
+.metrics-content-wrap .performance .figures-legend .legend-row::after,
+.metrics-content-wrap .isp-operators #isp-operator-names::after {
   content: "";
   clear: both;
   display: table;
@@ -50,6 +51,7 @@ h2.metrics-section-title {
 .metrics-content-wrap #broadband-metrics-map {
   width: 740px;
   float: left;
+  margin-top: 40px;
 }
 
 .metrics-content-wrap .state-filter {
@@ -182,6 +184,22 @@ h2.metrics-section-title {
 
 .metrics-content-wrap .performance .figures-legend .key.red {
   background: #e71b4f;
+}
+
+.metrics-content-wrap .isp-operators .provider {
+  float: left;
+  margin-right: 15px;
+  margin-bottom: 7px;
+}
+
+.metrics-content-wrap .isp-operators .provider a {
+  text-transform: uppercase;
+  text-decoration: none;
+  color: #343F49;
+}
+
+.metrics-content-wrap .isp-operators .provider a:hover {
+  border-bottom: 2px solid #343F49;
 }
 
 

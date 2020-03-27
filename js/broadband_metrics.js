@@ -72,10 +72,6 @@ var state_id =  {
         severely_elevated: 2
       },
       providers: {
-        2540: {
-         name: 'Altice',
-         link: 'https://www.alticeusa.com/'
-       },
         2560: {
           name: 'Charter',
           link: 'http://www.charter.net/'
