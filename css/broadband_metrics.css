@@ -1,31 +1,7 @@
 
-/*
-green: 00AC92
-yellow: FED241
-orange: ed6660
-red: e71b4f
-blue black: 343f49
-bright blue: 5ac9e7
-bright purple: 8c489a
-*/
 
-.metrics-wrap {
-  width: 1140px;
-  margin: 40px auto;
-  box-sizing: border-box;
-}
-
-@media all and (max-width: 1199px) {
-  .metrics-wrap {
-    width: 940px;
-  }
-}
-
-@media all and (max-width: 991px) {
-  .metrics-wrap {
-    width: 100%;
-    padding: 0px 40px;
-  }
+body {
+  background: #F5F5F8;
 }
 
 path.state {
@@ -35,9 +11,16 @@ path.state {
 h2.metrics-section-title {
   font-size: 2.5rem;
   letter-spacing: -.2px;
-  line-height: 2.875rem;
-  margin-bottom: 20px;
+  line-height: 2.5rem;
+  margin-bottom: 10px;
   color: #343F49;
+}
+
+.metrics-wrap {
+  background: #F5F5F8;
+  padding: 115px 0 120px;
+  max-width: 1140px;
+  margin: 0 auto;
 }
 
 .metrics-filter-instructions {
@@ -62,8 +45,8 @@ h2.metrics-section-title {
 }
 
 .metrics-content-wrap .data-col {
-  width: 320px;
-  margin-right: 80px;
+  width: 330px;
+  margin-right: 70px;
   float: left;
 }
 
@@ -84,11 +67,17 @@ h2.metrics-section-title {
 }
 
 .metrics-content-wrap .downstream-growth .overall,
+.metrics-content-wrap .upstream-growth .overall {
+  margin-right: 2%;
+}
+
+.metrics-content-wrap .downstream-growth .overall,
 .metrics-content-wrap .upstream-growth .overall,
 .metrics-content-wrap .downstream-growth .past-week,
 .metrics-content-wrap .upstream-growth .past-week {
   float: left;
-  width: 50%;
+  /*width: 50%;*/
+  width: 49%;
 }
 
 .metrics-content-wrap .downstream-growth-title,
@@ -103,22 +92,37 @@ h2.metrics-section-title {
 }
 
 .metrics-content-wrap .downstream-growth-title .small,
-.metrics-content-wrap .upstream-growth-title .small {
+.metrics-content-wrap .upstream-growth-title .small,
+.metrics-content-wrap .performance-title .small {
   font-size: 1rem;
 }
 
 .metrics-content-wrap .downstream-growth .figure .num,
 .metrics-content-wrap .upstream-growth .figure .num {
-  font-size: 2.5rem;
+  /*font-size: 2.5rem;
+  line-height: 2rem;
+  font-weight: bold;*/
+  font-size: 2rem;
   line-height: 2rem;
   font-weight: bold;
+  letter-spacing: -0.0125rem;
+}
+
+@media all and (min-width: 992px) and (max-width: 1199px) {
+  .metrics-content-wrap .downstream-growth .figure .num,
+  .metrics-content-wrap .upstream-growth .figure .num {
+    font-size: 1.75rem;
+    line-height: 1.75rem;
+  }
 }
 
 .metrics-content-wrap .downstream-growth .figure .percent,
 .metrics-content-wrap .upstream-growth .figure .percent {
   vertical-align: top;
-  font-size: 1.25rem;
+  /*font-size: 1.25rem;*/
   font-weight: bold;
+  letter-spacing: -0.0125rem;
+  font-size: 1rem;
 }
 
 .metrics-content-wrap .data-col .overall .figure {
@@ -133,11 +137,12 @@ h2.metrics-section-title {
   margin-right: 10px;
 }
 
-.metrics-content-wrap .data-col .overall .label,
-.metrics-content-wrap .data-col .past-week .label  {
+.metrics-content-wrap .data-col .overall .metric-label,
+.metrics-content-wrap .data-col .past-week .metric-label  {
   text-transform: uppercase;
   color: #343F49;
-  font-size: 0.9rem;
+  font-size: 0.9rem !important;
+  line-height: 1.1rem !important;
 }
 
 .metrics-content-wrap .performance .bars {
@@ -169,11 +174,17 @@ h2.metrics-section-title {
 
 .metrics-content-wrap .performance .figures-legend .legend-row {
   margin-bottom: 10px;
+  line-height: 1.1rem;
+}
+
+.metrics-content-wrap .performance .figures-legend .figure,
+.metrics-content-wrap .performance .figures-legend .legend-label {
+  font-size: 1rem !important;
 }
 
 .metrics-content-wrap .performance .figures-legend .figure,
 .metrics-content-wrap .performance .figures-legend .key,
-.metrics-content-wrap .performance .figures-legend .label {
+.metrics-content-wrap .performance .figures-legend .legend-label {
   float: left;
   margin-right: 8px;
 }
@@ -182,6 +193,7 @@ h2.metrics-section-title {
   font-weight: bold;
   width: 35px;
   text-align: center;
+  margin-right: 15px;
 }
 
 .metrics-content-wrap .performance .figures-legend .key {
@@ -219,6 +231,8 @@ h2.metrics-section-title {
   text-transform: uppercase;
   text-decoration: none;
   color: #343F49;
+  font-size: 1rem !important;
+  line-height: 1.25rem;
 }
 
 .metrics-content-wrap .isp-operators .provider a:hover {
@@ -252,6 +266,7 @@ h2.metrics-section-title {
 
 .metrics-content-wrap #broadband-metrics-small-states .small-state .box-text {
   font-size: 1.125rem;
+  line-height: 1.35rem;
 }
 
 .metrics-wrap .bottom-notes-sources .notes,
@@ -262,7 +277,7 @@ h2.metrics-section-title {
 
 .metrics-wrap .bottom-notes-sources .notes .notes-description,
 .metrics-wrap .bottom-notes-sources .sources .sources-description  {
-  display: none;
+  display: block;
 }
 
 .metrics-wrap .bottom-notes-sources .notes .notes-title,
@@ -271,6 +286,8 @@ h2.metrics-section-title {
   text-transform: uppercase;
   cursor: pointer;
   position: relative;
+  font-size: 1rem !important;
+  line-height: 1.1rem !important;
 }
 
 .metrics-wrap .bottom-notes-sources .notes .notes-title .arrow,
@@ -283,7 +300,14 @@ h2.metrics-section-title {
 }
 
 .metrics-wrap .bottom-notes-sources .notes .notes-description div {
-  padding-bottom: 3px;
+  padding-bottom: 5px;
+  font-size: 1rem !important;
+  line-height: 1.1rem !important;
+}
+
+.metrics-wrap .bottom-notes-sources .sources .sources-description {
+  font-size: 1rem !important;
+  line-height: initial;
 }
 
 .metrics-wrap .bottom-notes-sources .notes .notes-description,
@@ -343,7 +367,7 @@ h2.metrics-section-title {
 }
 
 .metrics-content-wrap .select2-container--default .select2-selection--single {
-    background-color: #fff;
+    background-color: #F5F5F8;
     border: 1px solid #343F49;
     border-radius: 0;
     font-size: 1.125rem;
@@ -376,15 +400,15 @@ h2.metrics-section-title {
 
 .metrics-content-wrap .select2-container--default .select2-selection--single .select2-selection__arrow b {
     border-style: initial;
-    border-width: initial;
+    border-width: 0;
     border-color: initial;
     margin-left: 0;
     margin-top: 0;
-    left: initial;
+    left: auto;
     right: 25px;
     position: absolute;
-    border-bottom: 3px solid #8c489a;
-    border-right: 3px solid #8c489a;
+    border-bottom: 3px solid #8c489a !important;
+    border-right: 3px solid #8c489a !important;
     transform-origin: 66% 66%;
     transform: rotate(45deg);
     transition: all .15s ease-in-out;
@@ -414,7 +438,13 @@ h2.metrics-section-title {
     color: #343F49;
 }
 
-
+@media all and (min-width: 992px) and (max-width: 1199px) {
+  .metrics-content-wrap .downstream-growth-title .small,
+  .metrics-content-wrap .upstream-growth-title .small,
+  .metrics-content-wrap .performance-title .small {
+    font-size: 0.8rem;
+  }
+}
 @media all and (max-width: 1199px) {
   .metrics-content-wrap #broadband-metrics-map {
     width: 614px;
@@ -426,7 +456,7 @@ h2.metrics-section-title {
   .metrics-content-wrap #broadband-metrics-small-states {
     bottom: 160px;
   }
-  .metrics-content-wrap .performance .figures-legend .label {
+  .metrics-content-wrap .performance .figures-legend .legend-label {
     max-width: 180px;
   }
   .metrics-content-wrap .downstream-growth-title,
@@ -490,6 +520,9 @@ h2.metrics-section-title {
   }
 }
 @media all and (max-width: 767px) {
+  .metrics-content-wrap #broadband-metrics-map {
+    margin-top: 0;
+  }
   .metrics-content-wrap .select2-container--default {
     max-width: 100%;
   }
@@ -515,12 +548,15 @@ h2.metrics-section-title {
     width: 100%;
     max-width: 400px;
     float: none;
-    margin: 0 auto 30px auto;
+    margin: 0 auto;
   }
   .metrics-content-wrap .downstream-growth-title,
   .metrics-content-wrap .upstream-growth-title,
   .metrics-content-wrap .performance-title,
   .metrics-content-wrap .isp-title {
     font-size: 1.5rem;
+  }
+  .metrics-content-wrap .state-filter {
+    margin-bottom: 30px;
   }
 }
