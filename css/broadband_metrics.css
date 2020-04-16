@@ -18,7 +18,7 @@ h2.metrics-section-title {
 
 .metrics-wrap {
   background: #F5F5F8;
-  padding: 115px 0 120px;
+  padding: 115px 15px 120px 15px;
   max-width: 1140px;
   margin: 0 auto;
 }
